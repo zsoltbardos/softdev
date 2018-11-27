@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.util.ArrayList;
@@ -17,7 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @Table (name = "EMPLOYEE14")
-
+@Inheritance( strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type" )
 
 @SequenceGenerator (name = "eid_seq", initialValue = 1, allocationSize = 1)
@@ -41,6 +36,11 @@ public class Employee {
     public Employee(String name, Calendar startDate) {
         this.name = name;
         this.startDate = startDate;
+    }
+    
+    public void addContact(Contact c) {
+        this.clist.add(c);
+        c.setEmp(this);
     }
 
     public int getEmpid() {
@@ -67,11 +67,31 @@ public class Employee {
     public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
+
+    public List<Contact> getClist() {
+        return clist;
+    }
+
+    public void setClist(List<Contact> clist) {
+        this.clist = clist;
+    }
+    
+    
     
     @Override
     public String toString() {
         return String.format(" Employee Id: %2d Name: %-10s "
                 + "Start Date: %3$8td %3$tB %3$tY   ",empid,name,startDate);
+    }
+    
+
+    public String toString_contacts() {
+        String e = "";
+        e += "Employee " + "Id: " + empid + ", Name: " + name + ", Contacts: ";
+        for (int i = 0; i < clist.size(); i++) {
+            e += "\n" + clist.get(i) + "\n";
+        }
+        return e;
     }
 
 }

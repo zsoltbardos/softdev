@@ -21,14 +21,14 @@ public class EmployeeOperations {
             OracleDataSource ods = new OracleDataSource();
 
 	    // Tallaght
-             ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
-             ods.setUser("x00157506");
-             ods.setPassword("db16Apr93");
+//             ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
+//             ods.setUser("x00157506");
+//             ods.setPassword("db16Apr93");
             
             // Home Oracle XE
-//            ods.setURL("jdbc:oracle:thin:HR/pmagee@localhost:1521:XE");
-//            ods.setUser("hr");
-//            ods.setPassword("passhr");
+            ods.setURL("jdbc:oracle:thin:HR/pmagee@localhost:1521:XE");
+            ods.setUser("hr");
+            ods.setPassword("passhr");
 
             conn = ods.getConnection();
             System.out.println("connected.");
@@ -128,8 +128,8 @@ public class EmployeeOperations {
                     + "address VARCHAR2(50),"
                     + "phone VARCHAR2(50),"
                     + "email VARCHAR2(50),"
-                    + "eid INTEGER,"
-                    + "FOREIGN KEY (eid) REFERENCES EMPLOYEE14 (empid))";
+                    + "emp_id INTEGER,"
+                    + "FOREIGN KEY (emp_id) REFERENCES EMPLOYEE14 (empid))";
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
             
@@ -211,15 +211,15 @@ public class EmployeeOperations {
             stmt = conn.createStatement();
             
             String sqlContact1 = "INSERT INTO Contact VALUES "
-                    + "(1, 'Mary', '2 Grafton St', '0876545678', 'mary@grafton.com', 1)";
+                    + "(cid_seq.nextVal, 'Mary', '2 Grafton St', '0876545678', 'mary@grafton.com', 1)";
             stmt.executeUpdate(sqlContact1);
             
             String sqlContact2 = "INSERT INTO Contact VALUES "
-                    + "(2, 'Ella', '2 Jones St', '0865432345', 'ella@jones.com', 2)";
+                    + "(cid_seq.nextVal, 'Ella', '2 Jones St', '0865432345', 'ella@jones.com', 2)";
             stmt.executeUpdate(sqlContact2);
             
             String sqlContact3 = "INSERT INTO Contact VALUES "
-                    + "(3, 'Seamus', '12 Henry St', '0879876543', 'seamus@henry.com', 3)";
+                    + "(cid_seq.nextVal, 'Seamus', '12 Henry St', '0879876543', 'seamus@henry.com', 3)";
             stmt.executeUpdate(sqlContact3);
             
             System.out.println("Contact table populated");

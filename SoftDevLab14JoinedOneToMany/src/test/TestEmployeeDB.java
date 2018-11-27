@@ -9,6 +9,8 @@ import db.EmployeeOperations;
 import db.PersistenceOperations;
 import java.util.Calendar;
 import java.util.Scanner;
+import model.Contact;
+import model.Employee;
 
 /**
  *
@@ -44,8 +46,11 @@ public class TestEmployeeDB {
             System.out.println("Please press 2 to view all employees");
             System.out.println("Please press 3 to view all PT employees");
             System.out.println("Please press 4 to view all FT employees");
-            System.out.println("Please press 5 to delete an employee using JPA method");;
-            System.out.println("Press 6 to quit");
+            System.out.println("Please press 5 to delete an employee using JPA method");
+            System.out.println("Please press 6 to add a new contact to an employee");
+            System.out.println("Please press 7 to view the contacts of an employee");
+            System.out.println("Please press 8 to delete a contact");
+            System.out.println("Press 9 to quit");
 
             int choice = in.nextInt();
             in.nextLine();
@@ -103,6 +108,50 @@ public class TestEmployeeDB {
                     }
                     break;
                 case 6:
+                    System.out.println("Please enter the id of the Employee for "
+                            + "who you wish to add a new contact");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    Employee e = po.findEmployee(id);
+                    if(e!=null){ 
+                        System.out.println(e.getName());
+                        System.out.println("Please enter the name of the new contact");
+                        String cname = in.nextLine();
+                        System.out.println("Please enter the address of the new contact");
+                        String caddress = in.nextLine();
+                        System.out.println("Please enter the phone of the new contact");
+                        String cphone = in.nextLine();
+                        System.out.println("Please enter the email of the new contact");
+                        String cemail = in.nextLine();
+                        Contact c = new Contact(cname,caddress,cphone,cemail);
+                        po.addContact(e,c);
+                    }
+                    break;  
+                case 7:
+                    System.out.println("Please enter the id of the Employee whose "
+                            + "contacts you wish to view");
+                    int employeeID = in.nextInt();
+                    in.nextLine();
+                    Employee employee = po.findEmployee(employeeID);
+                    if(employee!=null){ 
+                    po.showContacts(employeeID);
+                    }
+                    break;
+                case 8:
+                    System.out.println("Please enter the id of the staff member whose "
+                            + "contacts you wish to delete");
+                    eid = in.nextInt();
+                    in.nextLine();
+                    e = po.findEmployee(eid);
+                    if(e!=null){ 
+                    System.out.println("Please enter the id of the contact you wish "
+                            + "to delete");
+                    int cid = in.nextInt();
+                    in.nextLine();
+                    po.deleteContact(cid, eid);
+                    }                    
+                    break;
+                case 9:
                     po.close();
                     System.exit(0);
                     break;
