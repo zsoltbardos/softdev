@@ -8,6 +8,7 @@ package db;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
+import model.Contact;
 import model.Employee;
 import model.FullTimeEmployee;
 import model.PartTimeEmployee;
@@ -37,6 +38,20 @@ public class PersistenceOperations {
         }
         em.getTransaction().commit();
     }
+    
+    public void showContacts(int id) {
+        em.getTransaction().begin();
+        Employee e = em.find(Employee.class, id);
+        if(e==null){
+            System.out.println("Employee does not exist");
+        }else{
+        System.out.println(e.toString_contacts());
+        }
+        em.getTransaction().commit();
+
+    }
+    
+    
     
     public void showAllPT() {
         em.getTransaction().begin();
@@ -87,6 +102,21 @@ public class PersistenceOperations {
         em.getTransaction().begin();
         PartTimeEmployee pt1 = new PartTimeEmployee(name, sdate, rate, hrs);
         em.persist(pt1);
+        em.getTransaction().commit();
+    }
+    
+    public void addContact(Employee e, Contact c) {
+        em.getTransaction().begin();
+        e.addContact(c);
+        em.getTransaction().commit();
+    }
+    
+    public void deleteContact(int id, int eid){
+        Contact c = em.find(Contact.class, id);
+        Employee e = em.find(Employee.class, eid);
+        em.getTransaction().begin();
+        em.remove(c);
+        e.getClist().remove(c);
         em.getTransaction().commit();
     }
     
