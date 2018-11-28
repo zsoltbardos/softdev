@@ -21,14 +21,14 @@ public class EmployeeOperations {
             OracleDataSource ods = new OracleDataSource();
 
 	    // Tallaght
-//             ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
-//             ods.setUser("x00157506");
-//             ods.setPassword("db16Apr93");
+             ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
+             ods.setUser("x00157506");
+             ods.setPassword("db16Apr93");
             
             // Home Oracle XE
-            ods.setURL("jdbc:oracle:thin:HR/pmagee@localhost:1521:XE");
-            ods.setUser("hr");
-            ods.setPassword("passhr");
+//            ods.setURL("jdbc:oracle:thin:HR/pmagee@localhost:1521:XE");
+//            ods.setUser("hr");
+//            ods.setPassword("passhr");
 
             conn = ods.getConnection();
             System.out.println("connected.");

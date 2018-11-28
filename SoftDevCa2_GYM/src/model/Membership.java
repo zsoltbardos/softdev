@@ -27,7 +27,7 @@ public class Membership {
     private int mship_id;
     private String mship_type;
     private double mship_price;
-    private String mship_duration;
+    private double mship_duration;
 
     @OneToMany(mappedBy = "mship",cascade = CascadeType.ALL)
     private List<Member> memberList = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Membership {
 
     
     
-    public Membership(String mship_type, double mship_price, String mship_duration) {
+    public Membership(String mship_type, double mship_price, double mship_duration) {
         this.mship_type = mship_type;
         this.mship_price = mship_price;
         this.mship_duration = mship_duration;
@@ -67,11 +67,11 @@ public class Membership {
         this.mship_price = mship_price;
     }
 
-    public String getMship_duration() {
+    public double getMship_duration() {
         return mship_duration;
     }
 
-    public void setMship_duration(String mship_duration) {
+    public void setMship_duration(double mship_duration) {
         this.mship_duration = mship_duration;
     }
 
