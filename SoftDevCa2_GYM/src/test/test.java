@@ -17,33 +17,45 @@ public class test {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        MemberOperations dbo = new MemberOperations();
-        dbo.openDB();
+        MemberOperations mo = new MemberOperations();
+        mo.openDB();
 
-        dbo.dropMemberSequence();
-        dbo.dropClassSequence();
-        dbo.dropTrainerSequence();
-        dbo.dropMembershipSequence();
+        mo.dropClassSequence();
+        mo.dropMemberSequence();
+        mo.dropMembershipSequence();
+        mo.dropTrainerSequence();
 
-        so.createDepartmentSequence();
-        so.createAddressSequence();
-        so.createModuleSequence();
-        so.createStudentSequence();
+        mo.createClassSequence();
+        mo.createMemberSequence();
+        mo.createMembershipSequence();
+        mo.createTrainerSequence();
 
-        so.dropAddressTable();
-        so.dropStudentTable();
-        so.dropDEPTable();
-        so.dropGSTable();
-        so.dropNGTable();
-        so.dropModuleTable();
-        so.dropSTUDENTMODULETable();
+        mo.dropClassTable();
+        mo.dropMemberTable();
+        mo.dropMembershipTable();
+        mo.dropTrainerTable();
 
-        so.createDEPtable();
-        so.createAddresstable();
-        so.createStudenttable();
-        so.createGStable();
-        so.createNGtable();
-        so.createModuletable();
-        so.createSTUDENTMODULEtable();
+        mo.createTrainerTable();
+        mo.createClassTable();
+        mo.createMembershipTable();
+        mo.createMemberTable();
+        
+        mo.fillMembershipTable();
+        mo.fillMemberTable();
+        mo.fillTrainerTable();
+        mo.fillClassTable();
+
+
+
+
+//        so.fillDepartmentTable();
+//        so.fillAddressTable();
+//        so.fillStudentTable();
+//        so.fillGSTable();
+//        so.fillNGTable();
+//        so.fillModuleTable();
+//        so.fillSTUDENTMODULETable();
+
+        PersistenceOperations po = new PersistenceOperations();
     }
 }

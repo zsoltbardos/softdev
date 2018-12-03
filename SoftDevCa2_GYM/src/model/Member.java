@@ -149,6 +149,9 @@ public class Member {
         this.mship = mship;
     }
     
+    public void printMembership(){
+        System.out.println("Membership: " + mship);
+    }
     
 
     @Override

@@ -79,7 +79,7 @@ public class MemberOperations {
         }
     }
 
-    public void createMembershipeSequence() {
+    public void createMembershipSequence() {
         // Creating a sequence    
         try {
             String createseq1 = "create sequence mshipid_seq increment by 1 start with 1";
@@ -167,7 +167,7 @@ public class MemberOperations {
                     + "mem_address VARCHAR2(50),"
                     + "mem_dob DATE,"
                     + "mem_medical_condition VARCHAR2(100),"
-                    + "mship_id INTEGER,"
+                    + "mship_id NUMBER,"
                     + "FOREIGN KEY (mship_id) REFERENCES MEMBERSHIP (mship_id))";
 
 
@@ -181,38 +181,8 @@ public class MemberOperations {
     }
     
     // Address Table
-    public void dropMembershipTable() {
-        System.out.println("Checking for existence of MEMBERSHIP table");
-        try {
-            String s1 = "DROP TABLE MEMBERSHIP CASCADE CONSTRAINTS";
-            pstmt = conn.prepareStatement(s1);
-            pstmt.executeUpdate();
-            System.out.println("MEMBERSHIP table dropped");
-        } catch (SQLException ex) {
-
-        }
-    }
-
-    public void createMembershipTable() {
-        // Create a Table           
-        try {
-            String sql = "CREATE TABLE MEMBERSHIP (MSHIP_ID NUMBER PRIMARY KEY "
-                    + "NOT NULL,"
-                    + "mship_type VARCHAR2(90),"
-                    + "mship_price FLOAT,"
-                    + "mship_duration INTERVAL DAY [3] TO SECOND)";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.executeUpdate();
-            System.out.println("TABLE MEMBERSHIP created");
-        } catch (SQLException ex) {
-            System.out.println("SQL Exception creating "
-                    + "MEMBERSHIP table" + ex.getMessage());
-        }
-    }
-
-    // Student Table
     public void dropClassTable() {
-        System.out.println("Checking for existence of Student table");
+        System.out.println("Checking for existence of Class table");
         try {
             String s1 = "DROP TABLE CLASS CASCADE CONSTRAINTS";
             pstmt = conn.prepareStatement(s1);
@@ -226,33 +196,66 @@ public class MemberOperations {
     public void createClassTable() {
         // Create a Table           
         try {
-            String sql = "CREATE TABLE CLASS (class_id NUMBER PRIMARY KEY "
+            String sql = "CREATE TABLE Class (class_id NUMBER PRIMARY KEY "
                     + "NOT NULL,"
-                    + "class_name VARCHAR2(50),"
-                    + "class_day VARCHAR2(40),"
-                    + "class_time VARCHAR2(50))";
+                    + "class_name VARCHAR2(100),"
+                    + "class_day VARCHAR2(100),"
+                    + "class_time VARCHAR2(100),"
+                    + "trainer_id NUMBER NOT NULL,"
+                    + "FOREIGN KEY (trainer_id) REFERENCES TRAINER (trainer_id))";
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-            System.out.println("TABLE CLASS created");
+            System.out.println("TABLE Class created");
         } catch (SQLException ex) {
             System.out.println("SQL Exception creating "
-                    + "CLASS table" + ex.getMessage());
+                    + "Class table" + ex.getMessage());
+        }
+    }
+
+    // Student Table
+    public void dropMembershipTable() {
+        System.out.println("Checking for existence of Membership table");
+        try {
+            String s1 = "DROP TABLE MEMBERSHIP CASCADE CONSTRAINTS";
+            pstmt = conn.prepareStatement(s1);
+            pstmt.executeUpdate();
+            System.out.println("Membership table dropped");
+        } catch (SQLException ex) {
+
+        }
+    }
+
+    public void createMembershipTable() {
+        // Create a Table           
+        try {
+            String sql = "CREATE TABLE MEMBERSHIP (mship_id NUMBER PRIMARY KEY "
+                    + "NOT NULL,"
+                    + "mship_type VARCHAR2(255),"
+                    + "mship_price NUMBER,"
+                    + "mship_duration NUMBER)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+            System.out.println("TABLE MEMBERSHIP created");
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception creating "
+                    + "Membership table" + ex.getMessage());
         }
     }
     //Drop Grant Student table
 
     public void dropTrainerTable() {
-        System.out.println("Checking for existence of TRAINER  table");
+        System.out.println("Checking for existence of Trainer  table");
         try {
             String s1 = "DROP TABLE TRAINER CASCADE CONSTRAINTS";
             pstmt = conn.prepareStatement(s1);
             pstmt.executeUpdate();
-            System.out.println("TRAINER  table dropped");
+            System.out.println("Trainer  table dropped");
         } catch (SQLException ex) {
 
         }
     }
 
+    // Grant Student
     public void createTrainerTable() {
         // Create a Table           
         try {
@@ -271,6 +274,139 @@ public class MemberOperations {
         }
     }
     
+    public void createMember_ClassTable() {
+        // Create a Table           
+        try {
+            String sql = "CREATE TABLE MEMBER_CLASS (mem_id NUMBER, "
+                    + "class_id NUMBER,"
+                    + "PRIMARY KEY (mem_id, class_id),"
+                    + "FOREIGN KEY (mem_id) REFERENCES MEMBER (mem_id) ,"
+                    + "FOREIGN KEY (class_id) REFERENCES CLASS (class_id))";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+            System.out.println("TABLE MEMBER_CLASS created");
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception creating "
+                    + "MEMBER_CLASS table" + ex.getMessage());
+        }
+    }
+
+   
+    
+    // Fill Department table
+    public void fillMemberTable(){
+         try {
+            String sql = "INSERT INTO MEMBER VALUES(memid_seq.nextVal,?,?,?,?,?,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql);
+                       
+            pstmt.setString(1, "Peter");
+            pstmt.setString(2, "Pan");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "peter.pan@gmail.com");
+            pstmt.setString(6, "Neverland");
+            pstmt.setDate(7, Date.valueOf("1991-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,1);
+            pstmt.executeUpdate();            
+            
+
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception filling "
+                    + "Member table" + ex.getMessage());
+        }
+    }
+    
+        // Fill Department table
+    public void fillMembershipTable(){
+         try {
+            String sql = "INSERT INTO MEMBERSHIP VALUES(mshipid_seq.nextVal,?,?,?)";
+            pstmt = conn.prepareStatement(sql);
+                       
+            pstmt.setString(1, "Gym");
+            pstmt.setDouble(2, 60.0);
+            pstmt.setString(3, "30");          
+            pstmt.executeUpdate();  
+            
+             System.out.println("membership table filled");
+
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception filling "
+                    + "Membership table" + ex.getMessage());
+        }
+    }
+    
+    public void fillTrainerTable(){
+         try {
+            String sql = "INSERT INTO Trainer VALUES(trainerid_seq.nextVal,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql);
+                       
+            pstmt.setString(1, "Johnny");
+            pstmt.setString(2, "Bravo");
+            pstmt.setString(3, "johnny.bravo@gmail.com");
+            pstmt.setString(4, "123456789");          
+            pstmt.executeUpdate();  
+            
+             System.out.println("Trainer table filled");
+
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception filling "
+                    + "Trainer table" + ex.getMessage());
+        }
+    }
+    
+        public void fillClassTable(){
+         try {
+            String sql = "INSERT INTO Class VALUES(classid_seq.nextVal,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql);
+                       
+            pstmt.setString(1, "Boxing");
+            pstmt.setString(2, "Monday");
+            pstmt.setString(3, "15:00");
+            pstmt.setInt (4, 1);
+            pstmt.executeUpdate();  
+            
+             System.out.println("Class table filled");
+
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception filling "
+                    + "Class table" + ex.getMessage());
+        }
+    }
+    
+    
+    
+    
+//    // Fill Address Table
+//    public void fillAddressTable() {
+//        try {
+//            String sql = "INSERT INTO ADDRESS VALUES(adid_seq.nextVal,?,?)";
+//            pstmt = conn.prepareStatement(sql);
+//
+//            pstmt.setString(1, "2 Grafton St");
+//            pstmt.setString(2, "D02 Y527");
+//            pstmt.executeUpdate();
+//
+//            pstmt.setString(1, "4 Henry St");
+//            pstmt.setString(2, "D01 VE04");
+//            pstmt.executeUpdate();
+//
+//            pstmt.setString(1, "3 Moore St");
+//            pstmt.setString(2, "D01 W5C0");
+//            pstmt.executeUpdate();
+//
+//            pstmt.setString(1, "107 Dorset St");
+//            pstmt.setString(2, "D01 W9P4");
+//            pstmt.executeUpdate();
+//        } catch (SQLException ex) {
+//            System.out.println("SQL Exception filling "
+//                    + "STAFF table" + ex.getMessage());
+//        }
+//    }
+
+    
+
     public void closeDB() {
         try {
             pstmt.close();

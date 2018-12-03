@@ -34,6 +34,11 @@ public class Trainer {
         @OneToMany(mappedBy = "trainer",cascade = CascadeType.ALL)
     private List<Class> classList = new ArrayList<>();
 
+    public Trainer() {
+    }
+        
+        
+
     public Trainer(String trainer_first_name, String trainer_last_name, String trainer_phone, String trainer_email) {
         this.trainer_first_name = trainer_first_name;
         this.trainer_last_name = trainer_last_name;
@@ -88,5 +93,12 @@ public class Trainer {
         c.setTrainer(this);
     }
     
+    public void printClasses(){
+        System.out.println("Classes: ");
+        for (int i = 0; i < classList.size(); i++) {
+            System.out.println( classList.get(i));
+        }
+
+    }
     
 }

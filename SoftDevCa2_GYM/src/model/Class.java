@@ -47,7 +47,7 @@ public class Class {
     }
 
 
-    public void removeStudent(Member m) 
+    public void removeMember(Member m) 
     {
         memberList.remove(m);
         m.getClassList().remove(this);
@@ -57,7 +57,7 @@ public class Class {
     public void remove() {
         ArrayList<Member> temp = new ArrayList<>(memberList);
         for (int i = 0; i < temp.size(); i++) {
-            removeStudent(temp.get(i));
+            removeMember(temp.get(i));
         }
     }
 
