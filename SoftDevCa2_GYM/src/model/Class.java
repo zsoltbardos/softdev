@@ -5,6 +5,7 @@
  */
 package model;
 
+import db.PersistenceOperations;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class Class {
     @ManyToOne()
     @JoinColumn(name="trainer_id")
     private Trainer trainer;
-
+    
     public Class() {
     }
     
@@ -113,9 +114,7 @@ public class Class {
 
     @Override
     public String toString() {
-        String s = String.format(" - %1$s %n "
-                + "----------------------------", 
-                class_name);
+        String s = String.format(" - %1$s, %2$s, %3$s", class_name, class_day, class_time);
 
         return s;
     }

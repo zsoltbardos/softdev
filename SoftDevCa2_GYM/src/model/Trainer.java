@@ -92,6 +92,12 @@ public class Trainer {
         classList.add(c);
         c.setTrainer(this);
     }
+
+    public List<Class> getClassList() {
+        return classList;
+    }
+    
+    
     
     public void printClasses(){
         System.out.println("Classes ran by " + trainer_first_name + " " + trainer_last_name);

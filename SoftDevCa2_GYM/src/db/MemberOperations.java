@@ -27,13 +27,13 @@ public class MemberOperations {
             OracleDataSource ods = new OracleDataSource();
 
             // Tallaght
-             ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
-             ods.setUser("x00157506");
-             ods.setPassword("db16Apr93");
-            // Home Oracle XE
-//            ods.setURL("jdbc:oracle:thin:HR/pmagee@localhost:1521:XE");
-//            ods.setUser("hr");
-//            ods.setPassword("passhr");
+//             ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
+//             ods.setUser("x00157506");
+//             ods.setPassword("db16Apr93");
+//             Home Oracle XE
+            ods.setURL("jdbc:oracle:thin:HR/pmagee@localhost:1521:XE");
+            ods.setUser("hr");
+            ods.setPassword("passhr");
 
             conn = ods.getConnection();
             System.out.println("connected.");
@@ -421,6 +421,12 @@ public class MemberOperations {
             pstmt.setString(4, "123456789");          
             pstmt.executeUpdate();  
             
+            pstmt.setString(1, "Harry");
+            pstmt.setString(2, "Potter");
+            pstmt.setString(3, "harry.potter@gmail.com");
+            pstmt.setString(4, "123456789");          
+            pstmt.executeUpdate();  
+            
              System.out.println("Trainer table filled");
 
         } catch (SQLException ex) {
@@ -439,6 +445,12 @@ public class MemberOperations {
             pstmt.setString(3, "15:00");
             pstmt.setInt (4, 1);
             pstmt.executeUpdate();  
+            
+            pstmt.setString(1, "Spinning");
+            pstmt.setString(2, "Tuesday");
+            pstmt.setString(3, "16:00");
+            pstmt.setInt (4, 2);
+            pstmt.executeUpdate(); 
             
              System.out.println("Class table filled");
 

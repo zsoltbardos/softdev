@@ -110,6 +110,22 @@ public class PersistenceOperations {
         em.getTransaction().commit();
 
     }
+    
+    public List getClasses(){
+        em.getTransaction().begin();
+
+        TypedQuery<Class> query
+                = em.createQuery("SELECT c FROM Class c order by c.class_id",
+                        Class.class);
+        List<Class> results = query.getResultList();
+
+        
+        em.getTransaction().commit();
+        
+        return results;
+        
+    }
+    
     public void viewTrainers() {
         em.getTransaction().begin();
 
@@ -144,8 +160,10 @@ public class PersistenceOperations {
         Class c = em.find(Class.class, class_id);
         if(c==null){
             System.out.println("Class does not exist");
-        }else{
-        System.out.println(c.getMemberList());
+        }else
+        {
+            System.out.println("Members enrolled in " + c.getClass_name() + ":");
+            System.out.println(c.getMemberList());
         }
         em.getTransaction().commit();
 
@@ -234,6 +252,25 @@ public class PersistenceOperations {
         em.remove(mship);
         em.getTransaction().commit();
     }
+    
+//    public void whichClassWhichDay(String day){
+//        for (Object c : getClasses()) {
+//           if (day.toLowerCase().equals(c.getClass_name().toLowerCase())){
+//               System.out.println(class_name);
+//           }
+//        }
+//    }
+    
+    public void whichClassWhichDay(String day){
+        List<Class> classList = getClasses();
+        for (int i=0; i < classList.size(); i++) {
+            if (day.toLowerCase().equals(classList.get(i).getClass_day().toLowerCase())) {
+                System.out.println(" - " + classList.get(i).getClass_name());
+            }
+        }
+    }
+    
+
 
     public void close() {
         em.close();

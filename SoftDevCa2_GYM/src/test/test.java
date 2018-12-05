@@ -51,10 +51,12 @@ public class test {
         mo.fillMemberTable();
         mo.fillTrainerTable();
         mo.fillClassTable();
-//        mo.fillMember_ClassTable();
+
 
 
         PersistenceOperations po = new PersistenceOperations();
+        
+        po.enrolClass(1, 1);
         
          while (true) {
             System.out.println("Please press 1 to add a new member");
@@ -79,7 +81,9 @@ public class test {
             System.out.println("Please press 16 to delete a trainer");
             System.out.println("Please press 17 to delete a membership");
 
-            System.out.println("Press 18 to quit");
+            System.out.println("Please press 18 too search classes by day");
+            
+            System.out.println("Press 19 to quit");
 
             int choice = in.nextInt();
             in.nextLine();
@@ -270,7 +274,14 @@ public class test {
                         po.deleteMembership(mshipID);
                     }
                     break;
+
                 case 18:
+                    System.out.println("Please enter the name of the day you wish to view the classes on");
+                    classDay = in.nextLine();
+                    po.whichClassWhichDay(classDay);
+                    break;
+                    
+                case 19:
                     po.close();
                     mo.closeDB();
                     System.exit(0);
