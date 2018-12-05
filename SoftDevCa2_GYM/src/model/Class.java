@@ -113,9 +113,12 @@ public class Class {
 
     @Override
     public String toString() {
-        return "Class{" + "class_id=" + class_id + ", class_name=" + class_name + ", class_day=" + class_day + ", class_time=" + class_time + ", memberList=" + memberList + '}';
+        String s = String.format(" - %1$s %n "
+                + "----------------------------", 
+                class_name);
+
+        return s;
     }
-    
     
     
     

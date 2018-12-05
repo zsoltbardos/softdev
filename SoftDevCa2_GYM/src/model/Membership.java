@@ -91,9 +91,15 @@ public class Membership {
 
     @Override
     public String toString() {
-        return "Membership{" + "mship_id=" + mship_id + ", mship_type=" + mship_type + ", mship_price=" + mship_price + ", mship_duration=" + mship_duration + ", memberList=" + memberList + '}';
+        String s = String.format(" ID: %1$d, "
+                + "Type: %2$s, "
+                + "Price: €%3$.2f, "
+                + "Duration: %4$s days %n "
+                + "----------------------------", 
+                mship_id, mship_type, mship_price, mship_duration);
+
+        return s;
     }
-    
     
     
     

@@ -166,7 +166,7 @@ public class MemberOperations {
                     + "mem_email VARCHAR2(50),"
                     + "mem_address VARCHAR2(50),"
                     + "mem_dob DATE,"
-                    + "mem_medical_condition VARCHAR2(100),"
+                    + "mem_medical_con VARCHAR2(100),"
                     + "mship_id NUMBER,"
                     + "FOREIGN KEY (mship_id) REFERENCES MEMBERSHIP (mship_id))";
 
@@ -274,8 +274,19 @@ public class MemberOperations {
         }
     }
     
-    public void createMember_ClassTable() {
-        // Create a Table           
+    public void dropMember_ClassTable() {
+        System.out.println("Checking for existence of Member_Class  table");
+        try {
+            String s1 = "DROP TABLE MEMBER_CLASS CASCADE CONSTRAINTS";
+            pstmt = conn.prepareStatement(s1);
+            pstmt.executeUpdate();
+            System.out.println("Member_Class  table dropped");
+        } catch (SQLException ex) {
+
+        }
+    }
+    
+    public void createMember_ClassTable() {       
         try {
             String sql = "CREATE TABLE MEMBER_CLASS (mem_id NUMBER, "
                     + "class_id NUMBER,"
@@ -311,6 +322,17 @@ public class MemberOperations {
             pstmt.setInt(9,1);
             pstmt.executeUpdate();            
             
+            pstmt.setString(1, "Arnold");
+            pstmt.setString(2, "Schwarzenegger");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "arnold.chwarzenegger@gmail.com");
+            pstmt.setString(6, "California");
+            pstmt.setDate(7, Date.valueOf("1991-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,1);
+            pstmt.executeUpdate();    
+            
 
         } catch (SQLException ex) {
             System.out.println("SQL Exception filling "
@@ -318,22 +340,73 @@ public class MemberOperations {
         }
     }
     
-        // Fill Department table
     public void fillMembershipTable(){
          try {
             String sql = "INSERT INTO MEMBERSHIP VALUES(mshipid_seq.nextVal,?,?,?)";
             pstmt = conn.prepareStatement(sql);
                        
-            pstmt.setString(1, "Gym");
+            pstmt.setString(1, "Gym Only");
             pstmt.setDouble(2, 60.0);
             pstmt.setString(3, "30");          
             pstmt.executeUpdate();  
+            
+            pstmt.setString(1, "Gym Only");
+            pstmt.setDouble(2, 90.0);
+            pstmt.setString(3, "60");          
+            pstmt.executeUpdate(); 
+            
+            pstmt.setString(1, "Gym Only");
+            pstmt.setDouble(2, 200);
+            pstmt.setString(3, "180");          
+            pstmt.executeUpdate(); 
+            
+            pstmt.setString(1, "Gym Only");
+            pstmt.setDouble(2, 350);
+            pstmt.setString(3, "360");          
+            pstmt.executeUpdate(); 
+            
+            pstmt.setString(1, "Gym and Pool");
+            pstmt.setDouble(2, 80.0);
+            pstmt.setString(3, "30");          
+            pstmt.executeUpdate();  
+            
+            pstmt.setString(1, "Gym and Pool");
+            pstmt.setDouble(2, 130.0);
+            pstmt.setString(3, "60");          
+            pstmt.executeUpdate(); 
+            
+            pstmt.setString(1, "Gym and Pool");
+            pstmt.setDouble(2, 280);
+            pstmt.setString(3, "180");          
+            pstmt.executeUpdate(); 
+            
+            pstmt.setString(1, "Gym and Pool");
+            pstmt.setDouble(2, 420.0);
+            pstmt.setString(3, "360");          
+            pstmt.executeUpdate(); 
             
              System.out.println("membership table filled");
 
         } catch (SQLException ex) {
             System.out.println("SQL Exception filling "
                     + "Membership table" + ex.getMessage());
+        }
+    }
+    
+    public void fillMember_ClassTable(){
+         try {
+            String sql = "INSERT INTO MEMBER_CLASS VALUES(?,?)";
+            pstmt = conn.prepareStatement(sql);
+                       
+            pstmt.setInt(1, 1);
+            pstmt.setInt(2, 1);        
+            pstmt.executeUpdate();  
+            
+             System.out.println("member_class table filled");
+
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception filling "
+                    + "member_class table" + ex.getMessage());
         }
     }
     
@@ -375,36 +448,6 @@ public class MemberOperations {
         }
     }
     
-    
-    
-    
-//    // Fill Address Table
-//    public void fillAddressTable() {
-//        try {
-//            String sql = "INSERT INTO ADDRESS VALUES(adid_seq.nextVal,?,?)";
-//            pstmt = conn.prepareStatement(sql);
-//
-//            pstmt.setString(1, "2 Grafton St");
-//            pstmt.setString(2, "D02 Y527");
-//            pstmt.executeUpdate();
-//
-//            pstmt.setString(1, "4 Henry St");
-//            pstmt.setString(2, "D01 VE04");
-//            pstmt.executeUpdate();
-//
-//            pstmt.setString(1, "3 Moore St");
-//            pstmt.setString(2, "D01 W5C0");
-//            pstmt.executeUpdate();
-//
-//            pstmt.setString(1, "107 Dorset St");
-//            pstmt.setString(2, "D01 W9P4");
-//            pstmt.executeUpdate();
-//        } catch (SQLException ex) {
-//            System.out.println("SQL Exception filling "
-//                    + "STAFF table" + ex.getMessage());
-//        }
-//    }
-
     
 
     public void closeDB() {

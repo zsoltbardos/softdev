@@ -149,15 +149,32 @@ public class Member {
         this.mship = mship;
     }
     
-    public void printMembership(){
-        System.out.println("Membership: " + mship);
+    public void printClasses(){
+        System.out.println("Classes for: "+ mem_first_name + " " + mem_last_name);
+        for (int i = 0; i < classList.size(); i++) {
+            System.out.println( classList.get(i));
+        }
+
     }
     
-
+    
     @Override
     public String toString() {
-        return "Member{" + "mem_id=" + mem_id + ", mem_first_name=" + mem_first_name + ", mem_last_name=" + mem_last_name + ", mem_gender=" + mem_gender + ", mem_phone=" + mem_phone + ", mem_email=" + mem_email + ", mem_address=" + mem_address + ", mem_dob=" + mem_dob + ", mem_medical_con=" + mem_medical_con + ", classList=" + classList + '}';
+        String s = String.format(" ID: %1$d, "
+                + "Name: %2$s %3$s, "
+                + "Gender: %4$s, "
+                + "Phone: %5$s, "
+                + "Email: %6$s, "
+                + "Address: %7$s, "
+                + "Date of birth: %8$tb %8$td %8$tY, "
+                + "Medical conditions: %9$s %n"
+                + "Membership type: %10$s %n"
+                + "----------------------------", 
+                mem_id, mem_first_name, mem_last_name, mem_gender, mem_phone, mem_email, mem_address, mem_dob, mem_medical_con, mship.getMship_type());
+
+        return s;
     }
+    
     
     
     

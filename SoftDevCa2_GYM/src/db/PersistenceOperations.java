@@ -29,21 +29,38 @@ public class PersistenceOperations {
         em = emf.createEntityManager();
     }
 
-    public void addMember(String firstName, String lastName, String gender, String phone, String email, String address, Calendar dob, String medical_condition) {
+    public void addMember(String firstName, String lastName, String gender, String phone, String email, String address, Calendar dob, String medical_condition, int mshipID) {
         em.getTransaction().begin();
         Member m = new Member(firstName, lastName, gender, phone, email, address, dob, medical_condition);
+        Membership mship = em.find(Membership.class, mshipID);
+        if (mship != null) {
+            mship.addMember(m);
+        }
         em.persist(m);
         em.getTransaction().commit();
     }
     
     public void addTrainer(String firstName, String lastName, String phone, String email) {
+        em.getTransaction().begin();
         Trainer t = new Trainer(firstName, lastName, phone, email);
         em.persist(t);
         em.getTransaction().commit();
     }
     
-    public void addClass(String name, String day, String time) {
+    public void addMembership(String type, double price, String duration) {
+        em.getTransaction().begin();
+        Membership mship = new Membership(type, price, duration);
+        em.persist(mship);
+        em.getTransaction().commit();
+    }
+    
+    public void addClass(String name, String day, String time, int trainerID) {      
+        em.getTransaction().begin();
         Class c = new Class(name, day, time);
+        Trainer trainer = em.find(Trainer.class, trainerID);
+        if (trainer != null){
+            trainer.addClass(c);
+        }
         em.persist(c);
         em.getTransaction().commit();
     }
@@ -122,19 +139,19 @@ public class PersistenceOperations {
 
     }
 
-    public void viewClassMember(int class_id){
+    public void viewClassMembers(int class_id){
         em.getTransaction().begin();
         Class c = em.find(Class.class, class_id);
         if(c==null){
             System.out.println("Class does not exist");
         }else{
-        System.out.println(c);
+        System.out.println(c.getMemberList());
         }
         em.getTransaction().commit();
 
     }
 
-    public void viewTrainerClass(int trainer_id){
+    public void viewTrainerClasses(int trainer_id){
         em.getTransaction().begin();
         Trainer t = em.find(Trainer.class, trainer_id);
         if(t==null){
@@ -145,13 +162,13 @@ public class PersistenceOperations {
         em.getTransaction().commit();
     }
 
-    public void viewMemberMembership(int mem_id){
+    public void viewMemberClasses(int mem_id){
          em.getTransaction().begin();
         Member m = em.find(Member.class, mem_id);
         if(m==null){
             System.out.println("Member does not exist");
         }else{
-        m.printMembership();
+        m.printClasses();
         }
         em.getTransaction().commit();
     }
@@ -199,6 +216,22 @@ public class PersistenceOperations {
         Trainer t = em.find(Trainer.class, trainer_id);
         em.getTransaction().begin();
         em.remove(t);
+        em.getTransaction().commit();
+    }
+    
+    public Membership findMembership(int id) {
+        Membership m = em.find(Membership.class, id);
+        if (m == null) {
+            System.out.println("Not found");
+        }
+        return m;
+    }
+    
+        
+    public void deleteMembership(int mshipID) {
+        Membership mship = em.find(Membership.class, mshipID);
+        em.getTransaction().begin();
+        em.remove(mship);
         em.getTransaction().commit();
     }
 

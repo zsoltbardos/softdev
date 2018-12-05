@@ -94,11 +94,23 @@ public class Trainer {
     }
     
     public void printClasses(){
-        System.out.println("Classes: ");
+        System.out.println("Classes ran by " + trainer_first_name + " " + trainer_last_name);
         for (int i = 0; i < classList.size(); i++) {
             System.out.println( classList.get(i));
         }
 
+    }
+    
+    @Override
+    public String toString() {
+        String s = String.format(" ID: %1$d, "
+                + "Name: %2$s %3$s, "
+                + "Phone: %4$s, "
+                + "Email: %5$s %n "
+                + "----------------------------", 
+                trainer_id, trainer_first_name, trainer_last_name, trainer_phone, trainer_email);
+
+        return s;
     }
     
 }
