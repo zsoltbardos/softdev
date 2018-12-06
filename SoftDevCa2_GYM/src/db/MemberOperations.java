@@ -27,13 +27,13 @@ public class MemberOperations {
             OracleDataSource ods = new OracleDataSource();
 
             // Tallaght
-//             ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
-//             ods.setUser("x00157506");
-//             ods.setPassword("db16Apr93");
+             ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
+             ods.setUser("x00157506");
+             ods.setPassword("db16Apr93");
 //             Home Oracle XE
-            ods.setURL("jdbc:oracle:thin:HR/pmagee@localhost:1521:XE");
-            ods.setUser("hr");
-            ods.setPassword("passhr");
+//            ods.setURL("jdbc:oracle:thin:HR/pmagee@localhost:1521:XE");
+//            ods.setUser("hr");
+//            ods.setPassword("passhr");
 
             conn = ods.getConnection();
             System.out.println("connected.");
@@ -326,12 +326,133 @@ public class MemberOperations {
             pstmt.setString(2, "Schwarzenegger");
             pstmt.setString(3, "Male");
             pstmt.setString(4, "123456789");
-            pstmt.setString(5, "arnold.chwarzenegger@gmail.com");
+            pstmt.setString(5, "arnold.schwarzenegger@gmail.com");
             pstmt.setString(6, "California");
-            pstmt.setDate(7, Date.valueOf("1991-01-05"));
+            pstmt.setDate(7, Date.valueOf("1971-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,2);
+            pstmt.executeUpdate();    
+            
+            pstmt.setString(1, "Barack");
+            pstmt.setString(2, "Obama");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "barack.obama@gmail.com");
+            pstmt.setString(6, "Honolulu");
+            pstmt.setDate(7, Date.valueOf("1961-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,3);
+            pstmt.executeUpdate();    
+            
+            pstmt.setString(1, "Mickey");
+            pstmt.setString(2, "Mouse");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "mickey.mouse@gmail.com");
+            pstmt.setString(6, "Club House");
+            pstmt.setDate(7, Date.valueOf("1928-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,6);
+            pstmt.executeUpdate();    
+            
+            pstmt.setString(1, "Batman");
+            pstmt.setString(2, " ");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "batman.batman@gmail.com");
+            pstmt.setString(6, "Gotham");
+            pstmt.setDate(7, Date.valueOf("1939-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,7);
+            pstmt.executeUpdate();    
+            
+            pstmt.setString(1, "Homer");
+            pstmt.setString(2, "Simpson");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "homer.simpson@gmail.com");
+            pstmt.setString(6, "Springfield");
+            pstmt.setDate(7, Date.valueOf("1987-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,7);
+            pstmt.executeUpdate();    
+            
+            pstmt.setString(1, "Captain");
+            pstmt.setString(2, "America");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "captain.america@gmail.com");
+            pstmt.setString(6, "Hollywood");
+            pstmt.setDate(7, Date.valueOf("1941-01-05"));
             pstmt.setString(8, "test");
             pstmt.setInt(9,1);
             pstmt.executeUpdate();    
+            
+            pstmt.setString(1, "Superman");
+            pstmt.setString(2, " ");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "super.man@gmail.com");
+            pstmt.setString(6, "Smallville");
+            pstmt.setDate(7, Date.valueOf("1938-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,8);
+            pstmt.executeUpdate();    
+            
+            pstmt.setString(1, "Nicolas");
+            pstmt.setString(2, "Cage");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "nicolas.cage@gmail.com");
+            pstmt.setString(6, "California");
+            pstmt.setDate(7, Date.valueOf("1964-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,7);
+            pstmt.executeUpdate();    
+            
+            pstmt.setString(1, "Wonder");
+            pstmt.setString(2, "Woman");
+            pstmt.setString(3, "Female");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "wonder.woman@gmail.com");
+            pstmt.setString(6, "Holywood");
+            pstmt.setDate(7, Date.valueOf("1926-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,7);
+            pstmt.executeUpdate();  
+            
+            pstmt.setString(1, "Jennifer");
+            pstmt.setString(2, "Lawrence");
+            pstmt.setString(3, "Male");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "jennifer.lawrence@gmail.com");
+            pstmt.setString(6, "California");
+            pstmt.setDate(7, Date.valueOf("1990-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,7);
+            pstmt.executeUpdate();  
+            
+            pstmt.setString(1, "Emma");
+            pstmt.setString(2, "Watson");
+            pstmt.setString(3, "Female");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "emma.wattson@gmail.com");
+            pstmt.setString(6, "England");
+            pstmt.setDate(7, Date.valueOf("1990-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,7);
+            pstmt.executeUpdate();  
+            
+            pstmt.setString(1, "Emma");
+            pstmt.setString(2, "Stone");
+            pstmt.setString(3, "Female");
+            pstmt.setString(4, "123456789");
+            pstmt.setString(5, "emma.stone@gmail.com");
+            pstmt.setString(6, "Hollywood");
+            pstmt.setDate(7, Date.valueOf("1988-01-05"));
+            pstmt.setString(8, "test");
+            pstmt.setInt(9,7);
+            pstmt.executeUpdate();  
             
 
         } catch (SQLException ex) {
@@ -427,6 +548,20 @@ public class MemberOperations {
             pstmt.setString(4, "123456789");          
             pstmt.executeUpdate();  
             
+            pstmt.setString(1, "Rocky");
+            pstmt.setString(2, "Balboa");
+            pstmt.setString(3, "rocky.balboa@gmail.com");
+            pstmt.setString(4, "123456789");          
+            pstmt.executeUpdate();  
+            
+            pstmt.setString(1, "Bilbo");
+            pstmt.setString(2, "Baggings");
+            pstmt.setString(3, "bilbo.baggings@gmail.com");
+            pstmt.setString(4, "123456789");          
+            pstmt.executeUpdate();
+            
+            
+            
              System.out.println("Trainer table filled");
 
         } catch (SQLException ex) {
@@ -450,6 +585,18 @@ public class MemberOperations {
             pstmt.setString(2, "Tuesday");
             pstmt.setString(3, "16:00");
             pstmt.setInt (4, 2);
+            pstmt.executeUpdate(); 
+            
+            pstmt.setString(1, "Yoga");
+            pstmt.setString(2, "Wednesday");
+            pstmt.setString(3, "16:00");
+            pstmt.setInt (4, 3);
+            pstmt.executeUpdate(); 
+            
+            pstmt.setString(1, "CrossFit");
+            pstmt.setString(2, "Tuesday");
+            pstmt.setString(3, "10:00");
+            pstmt.setInt (4, 4);
             pstmt.executeUpdate(); 
             
              System.out.println("Class table filled");

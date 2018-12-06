@@ -169,7 +169,7 @@ public class Member {
                 + "Date of birth: %8$tb %8$td %8$tY, "
                 + "Medical conditions: %9$s %n"
                 + "Membership type: %10$s %n"
-                + "----------------------------", 
+                + "---------------------------- %n", 
                 mem_id, mem_first_name, mem_last_name, mem_gender, mem_phone, mem_email, mem_address, mem_dob, mem_medical_con, mship.getMship_type());
 
         return s;

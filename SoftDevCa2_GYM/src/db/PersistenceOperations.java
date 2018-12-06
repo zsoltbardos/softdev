@@ -5,6 +5,8 @@
  */
 package db;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -111,6 +113,8 @@ public class PersistenceOperations {
 
     }
     
+    
+    
     public List getClasses(){
         em.getTransaction().begin();
 
@@ -118,6 +122,21 @@ public class PersistenceOperations {
                 = em.createQuery("SELECT c FROM Class c order by c.class_id",
                         Class.class);
         List<Class> results = query.getResultList();
+
+        
+        em.getTransaction().commit();
+        
+        return results;
+        
+    }
+    
+    public List getMembers(){
+        em.getTransaction().begin();
+
+        TypedQuery<Member> query
+                = em.createQuery("SELECT m FROM Member m order by m.mem_id",
+                        Member.class);
+        List<Member> results = query.getResultList();
 
         
         em.getTransaction().commit();
@@ -266,8 +285,33 @@ public class PersistenceOperations {
         for (int i=0; i < classList.size(); i++) {
             if (day.toLowerCase().equals(classList.get(i).getClass_day().toLowerCase())) {
                 System.out.println(" - " + classList.get(i).getClass_name());
+            } else {
+                System.out.println("There are no classes on " + day);
+                break;
             }
         }
+    }
+    
+    public int calcAge(Calendar dob) {
+        int age;
+        LocalDate birthday = LocalDate.of(dob.get(Calendar.YEAR), 
+                Calendar.MONTH, Calendar.DAY_OF_MONTH);
+        LocalDate now = LocalDate.now();
+
+        Period period = Period.between(birthday, now);
+        age = period.getYears();
+        return age;
+    }
+    
+    public void viewAvarageAge() {
+        int ageSum = 0;
+        List<Member> memberList = getMembers();
+        for (int i=0; i < memberList.size(); i++) {
+           ageSum += calcAge(memberList.get(i).getMem_dob());
+        }
+        
+        int avgAge = ageSum / memberList.size();
+        System.out.println("The avarage age of members is " + avgAge);
     }
     
 

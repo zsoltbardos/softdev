@@ -57,6 +57,14 @@ public class test {
         PersistenceOperations po = new PersistenceOperations();
         
         po.enrolClass(1, 1);
+        po.enrolClass(2, 1);
+        po.enrolClass(3, 3);
+        po.enrolClass(4, 2);
+        po.enrolClass(5, 3);
+        po.enrolClass(6, 1);
+        po.enrolClass(7, 4);
+        po.enrolClass(8, 4);
+        po.enrolClass(9, 2);
         
          while (true) {
             System.out.println("Please press 1 to add a new member");
@@ -80,10 +88,12 @@ public class test {
             System.out.println("Please press 15 to delete a class");
             System.out.println("Please press 16 to delete a trainer");
             System.out.println("Please press 17 to delete a membership");
-
+             System.out.println("");
             System.out.println("Please press 18 too search classes by day");
+            System.out.println("Please press 19 too view the avarage age of the members");
+             System.out.println("");
+            System.out.println("Press 20 to quit");
             
-            System.out.println("Press 19 to quit");
 
             int choice = in.nextInt();
             in.nextLine();
@@ -282,6 +292,10 @@ public class test {
                     break;
                     
                 case 19:
+                    po.viewAvarageAge();
+                    break;
+                    
+                case 20:
                     po.close();
                     mo.closeDB();
                     System.exit(0);
